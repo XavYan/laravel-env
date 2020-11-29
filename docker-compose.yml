@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
   web:
     image: "nginx:1.19.5"
@@ -28,16 +28,12 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
-    ports:
-      - "6603:3306"
   phpmyadmin:
     image: "phpmyadmin:5.0.4-apache"
     container_name: "phpmyadmin"
     restart: always
     depends_on:
       - database
-    ports:
-      - "8008:80"
     environment:
       PMA_HOST: database
   back:
@@ -52,6 +48,3 @@ services:
       - ./api:/var/www
     depends_on:
       - database
-  front:
-    image: "alpine:edge"
-    container_name: "frontend"
