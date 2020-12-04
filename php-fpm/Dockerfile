@@ -8,6 +8,7 @@ ARG uid
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    vim \
     libpng-dev \
     libonig-dev \
     libxml2-dev \

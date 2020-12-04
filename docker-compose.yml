@@ -9,8 +9,9 @@ services:
     volumes:
       - "./conf.d:/etc/nginx/conf.d"
       - "./public:/usr/share/nginx/html"
+      - "./nginx.conf:/etc/nginx/nginx.conf"
     ports:
-      - "8080:80"
+      - "80:80"
     environment:
       NGINX_PORT: 80
   database:
@@ -39,12 +40,14 @@ services:
   back:
     build: 
       args:
-        user: test
+        user: api
         uid: 1000
       dockerfile: Dockerfile
       context: ./php-fpm
     container_name: "backend"
+    ports:
+      - "9000:9000"
     volumes:
-      - ./api:/var/www
+      - "./api:/var/www"
     depends_on:
       - database
